@@ -1,0 +1,4 @@
+#cmake build directories
+build/
+#project use directories
+.vscode/
