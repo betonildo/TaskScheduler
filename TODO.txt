@@ -1,0 +1,1 @@
+- Create a simple parallel module that is a function that is injected into a thread and execute. This module needs to schedule tasks to available threads.
