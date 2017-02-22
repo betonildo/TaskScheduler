@@ -2,7 +2,9 @@
 #define TASK_SCHEDULER_LOCAL_DEFINITIONS_H
 
 #include <stdio.h>
+#include <thread>
 #include <vector>
+#include <memory>
 #include <queue>
 #ifndef UNSIGNED_SIZE
 typedef unsigned long long unsigned_size_t;

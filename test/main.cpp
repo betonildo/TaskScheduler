@@ -1,6 +1,8 @@
 #include "TaskScheduler.h"
 
 #include <iostream>
+#include <mutex>
+
 
 int pn = 0;
 
@@ -10,7 +12,7 @@ class PrintTask : public Task {
 
 public:
 
-    virtual void run() {
+    virtual void operator()() {
         std::cout << "pn: " << pn++ << std::endl;
     }
 

@@ -7,7 +7,8 @@
 
 class TaskScheduler {
 
-    std::queue<Task*> m_taskQueue;
+    std::queue<std::unique_ptr<Task>> m_taskQueue;
+    bool m_isDone;
 
 public:
 
@@ -16,6 +17,7 @@ public:
 
     bool enqueue(Task* task);
     void startProcessing();
+    bool isDone();
 };
 
 #endif /*TASKSCHEDULER_H*/
