@@ -9,8 +9,7 @@ TaskScheduler::~TaskScheduler() {
 }
 
 bool TaskScheduler::enqueue(Task* task) {
-    std::unique_ptr<Task> taskPtr(task);
-    m_taskQueue.push(taskPtr);
+    m_taskQueue.push(task);
     return true;
 }
 
@@ -18,18 +17,18 @@ void TaskScheduler::startProcessing() {
     
     m_isDone = false;
     size_t max_threads = std::thread::hardware_concurrency();
-    std::vector<std::ref<std::thread>> threads;
+    std::vector<std::thread*> threads;
     threads.reserve(max_threads);
 
     while(!m_taskQueue.empty()) {
-        std::unique_ptr<Task> task = m_taskQueue.front();
-        std::thread t(std::move(*task));
-        threads.push_back(std::ref(t));
+        Task* task = m_taskQueue.front();
+        std::thread* t = new std::thread(std::ref(*task));
+        threads.push_back(t);
         m_taskQueue.pop();
     }
 
-    for(auto& tf: threads) {
-        tf.join();
+    for(auto tf: threads) {
+        tf->join();
     }
 
     m_isDone = true;

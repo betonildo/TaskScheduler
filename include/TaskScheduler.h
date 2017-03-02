@@ -7,7 +7,7 @@
 
 class TaskScheduler {
 
-    std::queue<std::unique_ptr<Task>> m_taskQueue;
+    std::queue<Task*> m_taskQueue;
     bool m_isDone;
 
 public:
