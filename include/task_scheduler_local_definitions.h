@@ -1,7 +1,6 @@
 #ifndef TASK_SCHEDULER_LOCAL_DEFINITIONS_H
 #define TASK_SCHEDULER_LOCAL_DEFINITIONS_H
 
-#include <stdio.h>
 #include <thread>
 #include <vector>
 #include <memory>
