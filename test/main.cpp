@@ -11,11 +11,12 @@ class PrintTask : public Task {
 
 
 public:
+    PrintTask() : Task(Task::TaskType::Single){
 
-    virtual void operator()() {
+    }
+    virtual void run() {
         std::cout << "pn: " << pn++ << std::endl;
     }
-
 };
 
 int main(int argc, char** argv) {

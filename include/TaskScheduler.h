@@ -6,7 +6,7 @@
 //#include "fixed_queue.h"
 
 class TaskScheduler {
-
+    std::mutex m_mutex;
     std::queue<Task*> m_taskQueue;
     bool m_isDone;
 

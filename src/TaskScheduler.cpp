@@ -22,6 +22,7 @@ void TaskScheduler::startProcessing() {
 
     while(!m_taskQueue.empty()) {
         Task* task = m_taskQueue.front();
+        task->useMutex(&m_mutex);
         std::thread* t = new std::thread(std::ref(*task));
         threads.push_back(t);
         m_taskQueue.pop();

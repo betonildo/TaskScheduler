@@ -2,6 +2,7 @@
 #define TASK_SCHEDULER_LOCAL_DEFINITIONS_H
 
 #include <thread>
+#include <mutex>
 #include <vector>
 #include <memory>
 #include <queue>
