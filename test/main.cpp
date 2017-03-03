@@ -1,31 +1,26 @@
 #include "TaskScheduler.h"
 
 #include <iostream>
-#include <mutex>
-
-
-int pn = 0;
 
 class PrintTask : public Task {
-
-
-
+    std::string m_str;
 public:
-    PrintTask() : Task(Task::TaskType::Single){
-
+    PrintTask(std::string str) : Task(Task::TaskType::Standalone){
+        m_str = str;
     }
+    
     virtual void run() {
-        std::cout << "pn: " << pn++ << std::endl;
+        std::cout << m_str << std::endl;
     }
 };
 
 int main(int argc, char** argv) {
 
-    PrintTask* pt1 = new PrintTask();
-    PrintTask* pt2 = new PrintTask();
-    PrintTask* pt3 = new PrintTask();
-    PrintTask* pt4 = new PrintTask();
-    PrintTask* pt5 = new PrintTask();
+    PrintTask* pt1 = new PrintTask("Hello");
+    PrintTask* pt2 = new PrintTask("My");
+    PrintTask* pt3 = new PrintTask("Friend");
+    PrintTask* pt4 = new PrintTask("We");
+    PrintTask* pt5 = new PrintTask("Meet Again");
 
     TaskScheduler taskScheduler;
 

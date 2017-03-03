@@ -1,14 +1,13 @@
 #ifndef TASK_H
 #define TASK_H
 
-#include <thread>
-#include <mutex>
+#include "task_scheduler_local_definitions.h"
 
 class Task {
 public:
     enum TaskType{
         Shared,
-        Single
+        Standalone
     };
 
 private:
