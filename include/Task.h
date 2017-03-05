@@ -10,30 +10,28 @@ public:
         Standalone
     };
 
-private:
+protected:
     Task::TaskType m_type;    
     std::mutex* m_g_mutex;
+
 public:
 
-
-
-    Task(TaskType type) {
+    inline Task(TaskType type) {
         m_type = type;
-    }  
+    }
+
+    inline void operator()() {
+        run();
+    };
 
     virtual void run() = 0;
 
-    void operator()() {
-        if (m_type == Shared) {
-            std::lock_guard<std::mutex> lock(*m_g_mutex);
-            run();
-        }
-        else {
-            run();
-        }
-    };
+    inline std::lock_guard<std::mutex>& getLockGuard() {
+        auto lock = new std::lock_guard<std::mutex>(*m_g_mutex);
+        return *lock;
+    }
 
-    void useMutex(std::mutex* g_mutex) {
+    inline void useMutex(std::mutex* g_mutex) {
         m_g_mutex = g_mutex;
     }
 };

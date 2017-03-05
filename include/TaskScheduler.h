@@ -6,18 +6,27 @@
 //#include "fixed_queue.h"
 
 class TaskScheduler {
+
+private:
     std::mutex m_mutex;
     std::queue<Task*> m_taskQueue;
-    bool m_isDone;
+    std::queue<std::function<void()> > m_functionQueue;
+    std::queue<std::thread*> m_execQueue;
+    std::atomic_bool m_isDone;
+    std::atomic_uint m_maxThreads;
+
+    std::thread* m_CreateThreadWith(Task* task);
 
 public:
 
     TaskScheduler();
     ~TaskScheduler();
 
-    bool enqueue(Task* task);
-    void startProcessing();
+    void enqueue(Task* task);
+    void enqueue(std::function<void(std::mutex*)> f);
+    int run();
     bool isDone();
+    void exitWhenFinishLastQueue();
 };
 
 #endif /*TASKSCHEDULER_H*/

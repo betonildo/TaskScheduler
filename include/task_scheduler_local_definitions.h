@@ -2,6 +2,9 @@
 #define TASK_SCHEDULER_LOCAL_DEFINITIONS_H
 
 #include <thread>
+#include <iostream>
+#include <functional>
+#include <atomic>
 #include <mutex>
 #include <vector>
 #include <memory>
