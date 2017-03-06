@@ -2,6 +2,7 @@
 #define TASKSCHEDULER_H
 
 #include "Task.h"
+#include "LockGuarder.h"
 #include "task_scheduler_local_definitions.h"
 //#include "fixed_queue.h"
 
@@ -16,6 +17,10 @@ private:
     std::atomic_uint m_maxThreads;
 
     std::thread* m_CreateThreadWith(Task* task);
+    std::thread* m_CreateThreadWith(std::function<void()> f);
+
+    // only this class can create instances of the LockGuarder
+    friend class LockGuarder;
 
 public:
 
@@ -23,7 +28,7 @@ public:
     ~TaskScheduler();
 
     void enqueue(Task* task);
-    void enqueue(std::function<void(std::mutex*)> f);
+    void enqueue(std::function<void(std::function<void()>)> f);
     int run();
     bool isDone();
     void exitWhenFinishLastQueue();
